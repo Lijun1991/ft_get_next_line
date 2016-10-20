@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myoung <myoung@student.42.us.org>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/19 17:39:29 by myoung            #+#    #+#             */
+/*   Updated: 2016/10/19 17:41:31 by myoung           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # define BUF_SIZE 100000000
@@ -8,18 +20,18 @@
 # include <sys/uio.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "libft/libft.h"
+# include <libft.h>
 
-typedef			struct s_fdbuf
+typedef	struct	s_fdbuf
 {
-	int		fd;
-	size_t	bytes_read;
-	size_t	buf_size;
-	int		ret_flag;
-	char	*buf;
+	int			fd;
+	size_t		bytes_read;
+	size_t		buf_size;
+	int			ret_flag;
+	char		*buf;
 }				t_fdbuf;
 
-typedef			struct s_fd_pack
+typedef	struct	s_fd_pack
 {
 	t_fdbuf		array[MAX_FD_COUNT];
 	int			index;

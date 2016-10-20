@@ -6,7 +6,7 @@
 /*   By: myoung <myoung@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 22:03:11 by myoung            #+#    #+#             */
-/*   Updated: 2016/10/14 19:17:46 by myoung           ###   ########.fr       */
+/*   Updated: 2016/10/19 17:38:06 by myoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static char		*prep_next_line(t_fd_pack *pack, void *newline)
 {
-	int		offset;
-	char	*out;
+	int					offset;
+	char				*out;
 
 	offset = newline - (void*)PACK.buf;
 	out = ft_strsub(PACK.buf, 0, offset);
@@ -26,26 +26,40 @@ static char		*prep_next_line(t_fd_pack *pack, void *newline)
 	return (out);
 }
 
+static char		*last_line(t_fd_pack *pack)
+{
+	char				*out;
+
+	if (PACK.buf && ft_strlen(PACK.buf))
+	{
+		out = ft_strdup(PACK.buf);
+		PACK.buf = NULL;
+		PACK.ret_flag = 1;
+		return (out);
+	}
+	return (NULL);
+}
+
 static char		*find_next_line(t_fd_pack *pack)
 {
 	int		read_ret;
 	void	*newline;
 
 	newline = NULL;
-	if (PACK.bytes_read)
+	if (PACK.bytes_read && PACK.buf)
 		newline = ft_memchr(PACK.buf, '\n', PACK.bytes_read);
 	while (!newline)
 	{
 		if (PACK.bytes_read + BUF_SIZE > PACK.buf_size)
 		{
-			PACK.buf = (char*)ft_realloc((void*) PACK.buf, PACK.buf_size);
+			PACK.buf = (char*)ft_realloc((void*)PACK.buf, PACK.buf_size);
 			PACK.buf_size *= 2;
 		}
 		read_ret = read(PACK.fd, PACK.buf + PACK.bytes_read, BUF_SIZE);
 		if (read_ret == 0 || read_ret == -1)
 		{
 			PACK.ret_flag = read_ret;
-			return (read_ret == 0 ? ft_strdup(PACK.buf) : NULL);
+			return (read_ret == 0 ? last_line(pack) : NULL);
 		}
 		PACK.bytes_read += read_ret;
 		newline = ft_memchr(PACK.buf, '\n', PACK.bytes_read);
@@ -60,7 +74,7 @@ static void		new_fd(t_fd_pack *pack, int fd)
 	pack->array[pack->index].buf = (char*)malloc(BUF_SIZE);
 }
 
-int			get_next_line(const int fd, char **line)
+int				get_next_line(const int fd, char **line)
 {
 	static t_fd_pack	files;
 
@@ -72,7 +86,7 @@ int			get_next_line(const int fd, char **line)
 		while (files.index < files.count)
 		{
 			if (FD_PACK.fd == fd)
-				break;
+				break ;
 			if (++files.index == files.count)
 			{
 				files.count++;
