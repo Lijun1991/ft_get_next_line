@@ -6,7 +6,7 @@
 /*   By: myoung <myoung@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 22:03:11 by myoung            #+#    #+#             */
-/*   Updated: 2016/10/19 17:38:06 by myoung           ###   ########.fr       */
+/*   Updated: 2016/10/20 15:40:30 by myoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static char		*prep_next_line(t_fd_pack *pack, void *newline)
 
 	offset = newline - (void*)PACK.buf;
 	out = ft_strsub(PACK.buf, 0, offset);
-	ft_memmove(PACK.buf, PACK.buf + offset + 1, PACK.bytes_read - offset);
+	ft_memmove(PACK.buf, PACK.buf + offset + 1, PACK.buf_size - offset);
 	PACK.bytes_read = PACK.bytes_read - offset - 1;
-	ft_bzero(PACK.buf + PACK.bytes_read, PACK.bytes_read);
+	ft_bzero(PACK.buf + PACK.bytes_read, PACK.buf_size - PACK.bytes_read);
 	PACK.ret_flag = 1;
 	return (out);
 }
@@ -32,7 +32,7 @@ static char		*last_line(t_fd_pack *pack)
 
 	if (PACK.buf && ft_strlen(PACK.buf))
 	{
-		out = ft_strdup(PACK.buf);
+		out = ft_strsub(PACK.buf, 0, PACK.bytes_read);
 		PACK.buf = NULL;
 		PACK.ret_flag = 1;
 		return (out);
