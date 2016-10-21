@@ -6,7 +6,7 @@
 /*   By: myoung <myoung@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 17:39:29 by myoung            #+#    #+#             */
-/*   Updated: 2016/10/20 15:53:31 by myoung           ###   ########.fr       */
+/*   Updated: 2016/10/20 20:08:02 by myoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # define PACK pack->array[pack->index]
 # include <sys/types.h>
 # include <sys/uio.h>
-# include <unistd.h>
-# include <stdlib.h>
 # include <libft.h>
 
 typedef	struct	s_fdbuf
