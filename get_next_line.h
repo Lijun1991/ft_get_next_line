@@ -6,13 +6,13 @@
 /*   By: myoung <myoung@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 17:39:29 by myoung            #+#    #+#             */
-/*   Updated: 2016/10/20 20:08:02 by myoung           ###   ########.fr       */
+/*   Updated: 2016/10/21 23:13:34 by myoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUF_SIZE 8
+# define BUFF_SIZE 8
 # define FD_PACK files.array[files.index]
 # define PACK pack->array[pack->index]
 # include <sys/types.h>

@@ -6,7 +6,7 @@
 /*   By: myoung <myoung@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 22:03:11 by myoung            #+#    #+#             */
-/*   Updated: 2016/10/20 15:40:30 by myoung           ###   ########.fr       */
+/*   Updated: 2016/10/21 23:09:58 by myoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char		*last_line(t_fd_pack *pack)
 		PACK.ret_flag = 1;
 		return (out);
 	}
-	return (NULL);
+	return (strdup(""));
 }
 
 static char		*find_next_line(t_fd_pack *pack)
@@ -50,12 +50,12 @@ static char		*find_next_line(t_fd_pack *pack)
 		newline = ft_memchr(PACK.buf, '\n', PACK.bytes_read);
 	while (!newline)
 	{
-		if (PACK.bytes_read + BUF_SIZE > PACK.buf_size)
+		if (PACK.bytes_read + BUFF_SIZE > PACK.buf_size)
 		{
 			PACK.buf = (char*)ft_realloc((void*)PACK.buf, PACK.buf_size);
 			PACK.buf_size *= 2;
 		}
-		read_ret = read(PACK.fd, PACK.buf + PACK.bytes_read, BUF_SIZE);
+		read_ret = read(PACK.fd, PACK.buf + PACK.bytes_read, BUFF_SIZE);
 		if (read_ret == 0 || read_ret == -1)
 		{
 			PACK.ret_flag = read_ret;
@@ -70,8 +70,8 @@ static char		*find_next_line(t_fd_pack *pack)
 static void		new_fd(t_fd_pack *pack, int fd)
 {
 	pack->array[pack->index].fd = fd;
-	pack->array[pack->index].buf_size = BUF_SIZE;
-	pack->array[pack->index].buf = (char*)malloc(BUF_SIZE);
+	pack->array[pack->index].buf_size = BUFF_SIZE;
+	pack->array[pack->index].buf = (char*)malloc(BUFF_SIZE);
 }
 
 int				get_next_line(const int fd, char **line)
