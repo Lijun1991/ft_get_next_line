@@ -6,7 +6,7 @@
 /*   By: myoung <myoung@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 22:03:11 by myoung            #+#    #+#             */
-/*   Updated: 2016/10/21 23:09:58 by myoung           ###   ########.fr       */
+/*   Updated: 2016/10/21 23:26:24 by myoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char		*last_line(t_fd_pack *pack)
 		PACK.ret_flag = 1;
 		return (out);
 	}
-	return (strdup(""));
+	return (ft_strdup(""));
 }
 
 static char		*find_next_line(t_fd_pack *pack)
