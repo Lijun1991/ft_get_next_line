@@ -6,13 +6,14 @@
 /*   By: myoung <myoung@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 17:39:29 by myoung            #+#    #+#             */
-/*   Updated: 2016/10/21 23:13:34 by myoung           ###   ########.fr       */
+/*   Updated: 2016/10/22 00:13:00 by myoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # define BUFF_SIZE 8
+# define MAX_FD_COUNT 1024
 # define FD_PACK files.array[files.index]
 # define PACK pack->array[pack->index]
 # include <sys/types.h>
@@ -30,7 +31,7 @@ typedef	struct	s_fdbuf
 
 typedef	struct	s_fd_pack
 {
-	t_fdbuf		array[1024];
+	t_fdbuf		array[MAX_FD_COUNT];
 	int			index;
 	int			count;
 }				t_fd_pack;
